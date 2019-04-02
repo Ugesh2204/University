@@ -10,7 +10,7 @@ using University.Data;
 namespace University.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190401072335_Ef_01")]
+    [Migration("20190401092312_Ef_01")]
     partial class Ef_01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,8 @@ namespace University.Migrations
                     b.Property<int>("InstructorId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
 
                     b.Property<int>("DepartmentId");
 

@@ -32,33 +32,34 @@
                         <a href="" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Courses</a>
+                        <a class="nav-link" asp-action="Index" asp-controller="Courses">Courses</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="" class="nav-link dropdown-toggle" id="navbarDropDown" role="button" data-toggle="dropdown">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Courses</a>
-                            <a class="dropdown-item" href="#">Teachers</a>
+                            <a class="dropdown-item" asp-action="Index" asp-controller="Department">Department</a>
+                            <a class="dropdown-item" href="#">Instructors</a>
 
                         </div>
                     </li>
                 </ul>
+
+
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a href="" class="nav-link"><i class="far fa-user"></i>Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">login</a>
+                        </li>
+                    </ul>
+
+
+                </div>
             </div>
 
-            <div>
-
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="nav-item">
-                        <a href="" class="nav-link"><i class="far fa-user"></i>Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">login</a>
-                    </li>
-                </ul>
-
-
-            </div>
+           
         </nav>
 
 
@@ -70,7 +71,7 @@
         <div class="cont ">
             <p>All Right Reserved UTEC</p>
         </div>
-       
+
     </footer>
 </body>
 </html>

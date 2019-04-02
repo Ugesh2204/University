@@ -31,6 +31,7 @@ namespace University.Migrations
                     LastName = table.Column<string>(nullable: false),
                     Salary = table.Column<double>(nullable: false),
                     HireDate = table.Column<DateTime>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
                     DepartmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

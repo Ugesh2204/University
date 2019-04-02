@@ -39,6 +39,8 @@ namespace University.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address");
+
                     b.Property<int>("DepartmentId");
 
                     b.Property<string>("FirstName")

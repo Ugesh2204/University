@@ -24,6 +24,9 @@ namespace University.Models
 
         public DateTime HireDate { get; set; }
 
+
+        public  String Address { get; set; }
+
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
         public Department Department {get; set;}

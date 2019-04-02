@@ -12,7 +12,10 @@ namespace University.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
+            //Database.Migrate();
+
+
         }
 
         public DbSet<Department>Departments { get; set; }
