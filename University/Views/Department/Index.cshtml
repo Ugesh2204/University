@@ -24,11 +24,18 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(x => x.DepartmentId)
+                    @*@Html.DisplayNameFor(x => x.DepartmentId)*@
+
+                    @Html.ActionLink("Department Id", "Index", new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), Sortby = "DepartmentId" })
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(x => x.DepartmentName)
+
+                  
+
+                    @Html.ActionLink("Department Name", "Index", new { SortOrder = (ViewBag.Sortorder==null?"Asc":(ViewBag.SortOrder=="Asc"?"Desc":"Asc")) , Sortby = "DepartmentName" })
+
+
                 </th>
             </tr>
 
@@ -42,6 +49,7 @@
                     <td>
 
                         @Html.DisplayFor(x => item.DepartmentName)
+                        
                     </td>
 
 

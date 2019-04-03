@@ -19,9 +19,59 @@ namespace University.Controllers
         }
 
         //Get Action
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SortOrder, string SortBy)
         {
-            return View(await _db.Departments.ToListAsync());
+            ViewBag.SortOrder = SortOrder;
+            ViewBag.SortBy = SortBy;
+
+            var department = await _db.Departments.ToListAsync();
+
+
+            switch (SortBy)
+            {
+
+                case "DepartmentId":
+                    switch (SortOrder)
+                    {
+                        case "Asc":
+                            department = department.OrderBy(x => x.DepartmentId).ToList();
+                            break;
+
+                        case "Desc":
+                            department = department.OrderByDescending(x => x.DepartmentId).ToList();
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    break;
+
+                case "DepartmentName":
+                    switch (SortOrder)
+                    {
+                        case "Asc":
+                            department = department.OrderBy(x => x.DepartmentName).ToList();
+                            break;
+
+                        case "Desc":
+                            department = department.OrderByDescending(x => x.DepartmentName).ToList();
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    break;
+
+                default:
+                    department = department.OrderBy(x => x.DepartmentId).ToList();
+                    break;
+
+            }
+
+
+            return View(department);
         }
 
 
