@@ -26,14 +26,22 @@
                 <th>
                     @*@Html.DisplayNameFor(x => x.DepartmentId)*@
 
-                    @Html.ActionLink("Department Id", "Index", new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")), Sortby = "DepartmentId" })
+                    @Html.ActionLink("Department Id", "Index",
+                    new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")),
+                    Sortby = "DepartmentId",
+                    page=(ViewBag.Page == null ? "1" : ViewBag.Page)
+                    })
                 </th>
 
                 <th>
 
-                  
 
-                    @Html.ActionLink("Department Name", "Index", new { SortOrder = (ViewBag.Sortorder==null?"Asc":(ViewBag.SortOrder=="Asc"?"Desc":"Asc")) , Sortby = "DepartmentName" })
+
+                    @Html.ActionLink("Department Name", "Index",
+                    new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")),
+                    Sortby = "DepartmentName",
+                    page=(ViewBag.Page == null ? "1" : ViewBag.Page)
+                    })
 
 
                 </th>
@@ -49,7 +57,7 @@
                     <td>
 
                         @Html.DisplayFor(x => item.DepartmentName)
-                        
+
                     </td>
 
 
@@ -68,7 +76,7 @@
                                 <i class="fas fa-trash-alt"></i>
                             </a>
 
-                           
+
                         </div>
                     </td>
                 </tr>
@@ -81,9 +89,46 @@
 
         </table>
 
+        @{
+            double TotalPage = ViewBag.TotalPages;
+
+        }
+
+        @for (int i = 1; i <= TotalPage; i++)
+        {
+
+            if (i == ViewBag.Page)
+            {
+                <b>
+                    @Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder),
+                    SortBy = (ViewBag.SortBy == null ? "DepartmentId" : ViewBag.SortBy),
+                    Page = i
+                    })
+
+                </b>
+
+            }
+
+            else
+            {
+
+                    @Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder),
+                    SortBy = (ViewBag.SortBy == null ? "DepartmentId" : ViewBag.SortBy),
+                    Page = i
+                    })
+
+            }
+
+
+        }
+
+
     </div>
 
 </div>
+
+
+
 
 
 

@@ -19,7 +19,7 @@ namespace University.Controllers
         }
 
         //Get Action
-        public async Task<IActionResult> Index(string SortOrder, string SortBy)
+        public async Task<IActionResult> Index(string SortOrder, string SortBy, string Page)
         {
             ViewBag.SortOrder = SortOrder;
             ViewBag.SortBy = SortBy;
@@ -69,6 +69,15 @@ namespace University.Controllers
                     break;
 
             }
+
+            //Paging logic
+
+            ViewBag.TotalPages = Math.Ceiling(_db.Departments.ToList().Count() / 5.0);
+
+            int page = int.Parse(Page == null ? "1" : Page);
+            ViewBag.Page = page;
+
+            department = department.Skip((page - 1) * 5).Take(5).ToList();
 
 
             return View(department);
