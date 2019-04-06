@@ -19,69 +19,37 @@ namespace University.Controllers
         }
 
         //Get Action
-        public async Task<IActionResult> Index(string SortOrder, string SortBy, string Page)
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            ViewBag.SortOrder = SortOrder;
-            ViewBag.SortBy = SortBy;
 
+            ViewBag.CurrentPage = 1;
+            ViewBag.LastPage = Math.Ceiling(Convert.ToDouble(_db.Departments.ToList().Count) / 5);
             var department = await _db.Departments.ToListAsync();
 
-
-            switch (SortBy)
-            {
-
-                case "DepartmentId":
-                    switch (SortOrder)
-                    {
-                        case "Asc":
-                            department = department.OrderBy(x => x.DepartmentId).ToList();
-                            break;
-
-                        case "Desc":
-                            department = department.OrderByDescending(x => x.DepartmentId).ToList();
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    break;
-
-                case "DepartmentName":
-                    switch (SortOrder)
-                    {
-                        case "Asc":
-                            department = department.OrderBy(x => x.DepartmentName).ToList();
-                            break;
-
-                        case "Desc":
-                            department = department.OrderByDescending(x => x.DepartmentName).ToList();
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    break;
-
-                default:
-                    department = department.OrderBy(x => x.DepartmentId).ToList();
-                    break;
-
-            }
-
-            //Paging logic
-
-            ViewBag.TotalPages = Math.Ceiling(_db.Departments.ToList().Count() / 5.0);
-
-            int page = int.Parse(Page == null ? "1" : Page);
-            ViewBag.Page = page;
-
-            department = department.Skip((page - 1) * 5).Take(5).ToList();
-
-
-            return View(department);
+            return View(department.Take(5));
         }
+
+        [HttpPost]
+        public ActionResult Index(int CurrentPage, int LastPage)
+        {
+            ViewBag.CurrentPage = CurrentPage;
+            ViewBag.LastPage = LastPage;
+            return View(_db.Departments.OrderBy(x => x.DepartmentId).Skip((CurrentPage - 1) * 5).Take(5));
+        }
+
+
+        //To whole the value 
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -24,25 +24,15 @@
         <table class="table">
             <tr>
                 <th>
-                    @*@Html.DisplayNameFor(x => x.DepartmentId)*@
+                    @Html.DisplayNameFor(x => x.DepartmentId)
 
-                    @Html.ActionLink("Department Id", "Index",
-                    new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")),
-                    Sortby = "DepartmentId",
-                    page=(ViewBag.Page == null ? "1" : ViewBag.Page)
-                    })
+                
                 </th>
 
                 <th>
 
 
-
-                    @Html.ActionLink("Department Name", "Index",
-                    new { SortOrder = (ViewBag.Sortorder == null ? "Asc" : (ViewBag.SortOrder == "Asc" ? "Desc" : "Asc")),
-                    Sortby = "DepartmentName",
-                    page=(ViewBag.Page == null ? "1" : ViewBag.Page)
-                    })
-
+                    @Html.DisplayNameFor(x => x.DepartmentName)
 
                 </th>
             </tr>
@@ -89,44 +79,74 @@
 
         </table>
 
-        @{
-            double TotalPage = ViewBag.TotalPages;
+       
+    </div>
 
-        }
-
-        @for (int i = 1; i <= TotalPage; i++)
+    <div>
+        @using (Html.BeginForm())
         {
 
-            if (i == ViewBag.Page)
-            {
-                <b>
-                    @Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder),
-                    SortBy = (ViewBag.SortBy == null ? "DepartmentId" : ViewBag.SortBy),
-                    Page = i
-                    })
-
-                </b>
-
-            }
-
-            else
-            {
-
-                    @Html.ActionLink(i.ToString() + " ", "Index", new { SortOrder = (ViewBag.SortOrder == null ? "Asc" : ViewBag.SortOrder),
-                    SortBy = (ViewBag.SortBy == null ? "DepartmentId" : ViewBag.SortBy),
-                    Page = i
-                    })
-
-            }
+            <input type="hidden" id="CurrentPage" name="CurrentPage" value="@ViewBag.CurrentPage" />
+            <input type="hidden" id="LastPage" name="LastPage" value="@ViewBag.LastPage" />
 
 
         }
 
+
+
+        <input type="button" class="btn btn-primary" id="Previous" value="Previous" />
+        <input type="button" class="btn btn-primary" id="Next" value="Next" />
 
     </div>
 
+
 </div>
 
+<script>
+
+    $(document).ready(function () {
+        $("#Previous").click(function () {
+
+            if(CalculateAndSetPage("Previous"))
+             $("form").submit();
+        });
+
+        $("#Next").click(function () {
+            if(CalculateAndSetPage("Next"))
+             $("form").submit();
+        });
+
+    });
+
+    function CalculateAndSetPage(movingType) {
+        var currentPage = parseInt($("#CurrentPage").val());
+        var lastpage = parseInt($("#LastPage").val());
+
+
+        if (currentPage == 1 && movingType == "Previous") 
+           return false;
+
+        if (currentPage == lastpage && movingType == "Next")
+            return false;
+
+
+        if ( movingType == "Previous") {
+
+            currentPage--;
+        }
+
+        else if (movingType == "Next") {
+            currentPage++;
+        }
+
+        else
+            alert("Something is wrong");
+
+        $("#CurrentPage").val(currentPage);
+        return true;
+    }
+
+</script>
 
 
 
