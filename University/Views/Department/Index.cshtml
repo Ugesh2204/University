@@ -16,86 +16,42 @@
         </a>
     </p>
 
+
     <h2>Department List</h2>
 
+    @*Rendering the Table*@
 
-    <div class="form-border">
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(x => x.DepartmentId)
-
-                
-                </th>
-
-                <th>
-
-
-                    @Html.DisplayNameFor(x => x.DepartmentName)
-
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(x => item.DepartmentId)
-                    </td>
-
-                    <td>
-
-                        @Html.DisplayFor(x => item.DepartmentName)
-
-                    </td>
-
-
-                    <td style="width:150px;">
-                        <div class="btn-group" role="group">
-
-                            <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="btn btn-primary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-
-                            <a asp-action="Detail" asp-route-id="@item.DepartmentId" class="btn btn-primary">
-                                <i class="fas fa-list-alt"></i>
-                            </a>
-
-                            <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="btn btn-danger">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-
-
-                        </div>
-                    </td>
-                </tr>
-
-
-
-            }
-
-
-
-        </table>
-
-       
+    <div id="DepartmentDiv">
+        @Html.Partial("DepartmentListPartialView", Model)
     </div>
 
+
+
+
+    
+
+
     <div>
-        @using (Html.BeginForm())
-        {
 
-            <input type="hidden" id="CurrentPage" name="CurrentPage" value="@ViewBag.CurrentPage" />
-            <input type="hidden" id="LastPage" name="LastPage" value="@ViewBag.LastPage" />
+        <form asp-action="Index" asp-controller="Department"
+              data-ajax="true"
+              data-ajax-method="POST"
+              data-ajax-mode="replace"
+              data-ajax-update="#DepartmentDiv">
+
+           
+
+                <input type="hidden" id="CurrentPage" name="CurrentPage" value="@ViewBag.CurrentPage" />
+                <input type="hidden" id="LastPage" name="LastPage" value="@ViewBag.LastPage" />
 
 
-        }
+            
+         </form>
 
 
 
-        <input type="button" class="btn btn-primary" id="Previous" value="Previous" />
-        <input type="button" class="btn btn-primary" id="Next" value="Next" />
+            <input type="button" class="btn btn-primary" id="Previous" value="Previous" />
+            <input type="button" class="btn btn-primary" id="Next" value="Next" />
 
     </div>
 

@@ -35,7 +35,7 @@ namespace University.Controllers
         {
             ViewBag.CurrentPage = CurrentPage;
             ViewBag.LastPage = LastPage;
-            return View(_db.Departments.OrderBy(x => x.DepartmentId).Skip((CurrentPage - 1) * 5).Take(5));
+            return PartialView("DepartmentListPartialView", _db.Departments.OrderBy(x => x.DepartmentId).Skip((CurrentPage - 1) * 5).Take(5));
         }
 
 

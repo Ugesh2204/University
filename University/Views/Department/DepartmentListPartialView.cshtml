@@ -1,0 +1,65 @@
+﻿@model IEnumerable<University.Models.Department>
+
+
+<div class="form-border">
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => x.DepartmentId)
+
+
+            </th>
+
+            <th>
+
+
+                @Html.DisplayNameFor(x => x.DepartmentName)
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.DepartmentId)
+                </td>
+
+                <td>
+
+                    @Html.DisplayFor(x => item.DepartmentName)
+
+                </td>
+
+
+                <td style="width:150px;">
+                    <div class="btn-group" role="group">
+
+                        <a asp-action="Edit" asp-route-id="@item.DepartmentId" class="btn btn-primary">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <a asp-action="Detail" asp-route-id="@item.DepartmentId" class="btn btn-primary">
+                            <i class="fas fa-list-alt"></i>
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.DepartmentId" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+
+
+                    </div>
+                </td>
+            </tr>
+
+
+
+        }
+
+
+
+    </table>
+
+
+</div>
